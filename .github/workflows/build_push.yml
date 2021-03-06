@@ -69,7 +69,7 @@ jobs:
           configuration-cache-enabled: true
 
       - name: Sign APKs
-        if: github.repository == 'tachiyomiorg/tachiyomi-extensions'
+
         run: |
           cd master
           ./.github/scripts/sign-apks.sh \
