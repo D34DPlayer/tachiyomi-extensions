@@ -41,7 +41,6 @@ for APK in ${APKS[@]}; do
         ${TOOLS}/zipalign -c -v -p 4 $APK
 
         cp $APK $APKDEST
-        ${TOOLS}/apksigner sign --ks $STORE_PATH --ks-key-alias "alias" --ks-pass "password" --key-pass "password" $APKDEST
     ) &
 
     # Allow to execute up to $MAX_PARALLEL jobs in parallel
