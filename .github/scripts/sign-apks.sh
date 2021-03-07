@@ -13,13 +13,18 @@ if [ "${#APKS[@]}" -le "1" ]; then
 fi;
 
 # Take base64 encoded key input and put it into a file
-STORE_PATH=$PWD/signingkey.jks
-rm -f $STORE_PATH && touch $STORE_PATH
-echo $1 | base64 -d > $STORE_PATH
+keytool -genkey -noprompt \                                                                                                                            I ╱ 100%  ▓▒░
+ -alias alias \
+ -dname "CN=d34dplayer.tk, OU=Unknown, O=Unknown, L=Unknown, S=Unknown, C=BE" \
+ -keystore keystore \
+ -storepass password \
+ -keypass password
 
-STORE_ALIAS=$2
-export KEY_STORE_PASSWORD=$3
-export KEY_PASSWORD=$4
+STORE_PATH=$PWD/keystore
+
+STORE_ALIAS=alias
+export KEY_STORE_PASSWORD=password
+export KEY_PASSWORD=password
 
 DEST=$PWD/apk
 rm -rf $DEST && mkdir -p $DEST
@@ -36,7 +41,7 @@ for APK in ${APKS[@]}; do
         ${TOOLS}/zipalign -c -v -p 4 $APK
 
         cp $APK $APKDEST
-        ${TOOLS}/apksigner sign --ks $STORE_PATH --ks-key-alias mykey --ks-pass banane --key-pass banane $APKDEST
+        ${TOOLS}/apksigner sign --ks $STORE_PATH --ks-key-alias alias --ks-pass password --key-pass password $APKDEST
     ) &
 
     # Allow to execute up to $MAX_PARALLEL jobs in parallel
