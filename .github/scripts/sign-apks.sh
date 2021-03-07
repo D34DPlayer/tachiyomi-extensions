@@ -14,17 +14,17 @@ fi;
 
 # Take base64 encoded key input and put it into a file
 keytool -genkey -noprompt \
- -alias alias \
+ -alias "alias" \
  -dname "CN=d34dplayer.tk, OU=Unknown, O=Unknown, L=Unknown, S=Unknown, C=BE" \
- -keystore keystore \
- -storepass password \
- -keypass password
+ -keystore "keystore" \
+ -storepass "password" \
+ -keypass "password"
 
 STORE_PATH=$PWD/keystore
 
-STORE_ALIAS=alias
-export KEY_STORE_PASSWORD=password
-export KEY_PASSWORD=password
+STORE_ALIAS="alias"
+export KEY_STORE_PASSWORD="password"
+export KEY_PASSWORD="password"
 
 DEST=$PWD/apk
 rm -rf $DEST && mkdir -p $DEST
@@ -41,7 +41,7 @@ for APK in ${APKS[@]}; do
         ${TOOLS}/zipalign -c -v -p 4 $APK
 
         cp $APK $APKDEST
-        ${TOOLS}/apksigner sign --ks $STORE_PATH --ks-key-alias alias --ks-pass password --key-pass password $APKDEST
+        ${TOOLS}/apksigner sign --ks $STORE_PATH --ks-key-alias "alias" --ks-pass "password" --key-pass "password" $APKDEST
     ) &
 
     # Allow to execute up to $MAX_PARALLEL jobs in parallel
