@@ -13,7 +13,7 @@ if [ "${#APKS[@]}" -le "1" ]; then
 fi;
 
 # Take base64 encoded key input and put it into a file
-keytool -genkey -noprompt \                                                                                                                            I ╱ 100%  ▓▒░
+keytool -genkey -noprompt \
  -alias alias \
  -dname "CN=d34dplayer.tk, OU=Unknown, O=Unknown, L=Unknown, S=Unknown, C=BE" \
  -keystore keystore \
